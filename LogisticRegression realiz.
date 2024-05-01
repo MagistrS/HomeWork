@@ -6,8 +6,12 @@ from sklearn.linear_model import LogisticRegression
 import scikitplot as skplt
 from sklearn import metrics
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report, confusion_matrix
-# Загрузка датасета и его визуализация
+
+
+"""Загрузка датасета и его визуализация"""
 mnist = fetch_openml(data_id=554) #https://www.openml.org/d/554
+#Вот тут хз, этот датасет в Colab скачивается сам как-то, а тут надо отдельно его скачивать, но у моего браузера (Opera GX) видимо
+#какие-то проблемы с этим (хз), так что в PyCharm'e я этот код не проверял, только в Colab
 
 type(mnist.data), type(mnist.categories), type(mnist.feature_names), type(mnist.target)
 
@@ -28,11 +32,16 @@ X_train, X_test, y_train, y_test = train_test_split(data[:10000,:],
 
 X_train.shape, X_test.shape
 
+
 """Обучение модели"""
+
+# Я самостоятельно написал всего две эти строчки. ↓
+# И даже если всё работает, мне всё равно не по себе
 
 clf = LogisticRegression(solver="saga", penalty="l1", n_jobs=5, tol=0.01, max_iter=1000)
 
 clf.fit(X_train, y_train)
+
 
 """Валидация модели"""
 
