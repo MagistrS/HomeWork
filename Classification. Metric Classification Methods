@@ -1,291 +1,77 @@
-{
-  "nbformat": 4,
-  "nbformat_minor": 0,
-  "metadata": {
-    "colab": {
-      "provenance": [],
-      "toc_visible": true
-    },
-    "kernelspec": {
-      "name": "python3",
-      "display_name": "Python 3"
-    },
-    "language_info": {
-      "name": "python"
-    }
-  },
-  "cells": [
-    {
-      "cell_type": "markdown",
-      "source": [
-        "# Задание"
-      ],
-      "metadata": {
-        "id": "UUuumg1_4ue8"
-      }
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "В рамках этого задания вам предстоить подобрать оптимальное число соседей для алгоритма kNN. Датасет здесь будет сгенерирован с помощью специальной функции datasets.make_classification из библиотеки scikit-learn. Часть кода уже написана, её рекомендуется не изменять, а только запустить код в ячейках. Собственно, вам требуется подобрать такое число соседей k, чтоб вы прошли валидацию в соответствующей ячейке \"Валидация модели\". Очень полезно будет, если вы посмотрите на питон-ноутбук, ссылка на который в конце конспекта к этому вебинару или же посмотрите на то, как подобное исследование проводит преподаватель на вебинаре. Успехов!"
-      ],
-      "metadata": {
-        "id": "brboihZ040ay"
-      }
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "Код с вебинара: https://colab.research.google.com/drive/11oGsSE5vcSMdMkGmKRSqKhLEb4TEvwf3"
-      ],
-      "metadata": {
-        "id": "3Zuyu0MH7Nzn"
-      }
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "# Импорт библиотек"
-      ],
-      "metadata": {
-        "id": "V7EjGEaSbjKR"
-      }
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "!pip install scikit-plot\n",
-        "import scikitplot as skplt"
-      ],
-      "metadata": {
-        "id": "dPEOkUPDp6MS"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "from sklearn import datasets\n",
-        "from sklearn.model_selection import train_test_split\n",
-        "from sklearn.neighbors import KNeighborsClassifier\n",
-        "from sklearn.metrics import accuracy_score, classification_report, confusion_matrix\n",
-        "import matplotlib.pyplot as plt\n",
-        "import numpy as np"
-      ],
-      "metadata": {
-        "id": "0nQLw9tFY5NH"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "# Работа с данными"
-      ],
-      "metadata": {
-        "id": "NYUvLU-fbn2k"
-      }
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "hard_problem = datasets.make_classification(\n",
-        "    n_samples=100,\n",
-        "    n_features=100,\n",
-        "    n_informative=50,\n",
-        "    n_classes=3,\n",
-        "    n_redundant=50,\n",
-        "    n_clusters_per_class=1,\n",
-        "    random_state=42,\n",
-        ")"
-      ],
-      "metadata": {
-        "id": "1k_7r2f4YdP8"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "X_train, X_test, y_train, y_test = train_test_split(\n",
-        "    *hard_problem,\n",
-        "    test_size=0.3,\n",
-        "    random_state=1,\n",
-        ")"
-      ],
-      "metadata": {
-        "id": "xqpA-mMHfw8x"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "# Обучение модели"
-      ],
-      "metadata": {
-        "id": "9I_G2pH_00VQ"
-      }
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "Обучим модель с k=8:"
-      ],
-      "metadata": {
-        "id": "4GrVOXJX5pbI"
-      }
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "clf = KNeighborsClassifier(n_neighbors=8)\n",
-        "clf.fit(X_train, y_train)"
-      ],
-      "metadata": {
-        "id": "KYLj_Mfy07zG"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "predictions = clf.predict(X_test)\n",
-        "accuracy_score(y_test, predictions)"
-      ],
-      "metadata": {
-        "id": "y8TbW42q082t"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# Ваш код для поиска оптимального значения k"
-      ],
-      "metadata": {
-        "id": "zRRCzSz7YdG8"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# Ваш код для построения графика зависимости accuracy(k) - метрики accuracy в зависимости от числа k"
-      ],
-      "metadata": {
-        "id": "EZZxWa1Y2DBP"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "# Обучение модели с лучшим числом соседей k:"
-      ],
-      "metadata": {
-        "id": "yMpcdPhg2mmQ"
-      }
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "k_optim = # здесь введите ваше оптимальное значение k"
-      ],
-      "metadata": {
-        "id": "ooM9Iu3w2l0d"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "clf = KNeighborsClassifier(n_neighbors=k_optim)\n",
-        "clf.fit(X_train, y_train)"
-      ],
-      "metadata": {
-        "id": "vjOfJgMr3MI4"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "y_pred = clf.predict(X_test)"
-      ],
-      "metadata": {
-        "id": "qhcshw-F3VD5"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "markdown",
-      "source": [
-        "# Валидация модели"
-      ],
-      "metadata": {
-        "id": "Xk-At0ggb2Xk"
-      }
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# Calculate accuracy\n",
-        "accuracy = accuracy_score(y_test, y_pred)\n",
-        "print(\"Accuracy:\", accuracy)"
-      ],
-      "metadata": {
-        "id": "BFbIKleydHR_"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "print(\"Test accuracy: %.5f\" % accuracy)\n",
-        "assert accuracy > 0.8, \"попробуйте изменить следующие параметры: penalty, solver\"\n",
-        "\n",
-        "print('Хорошая работа!')"
-      ],
-      "metadata": {
-        "id": "z6ara7cE219o"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "skplt.metrics.plot_confusion_matrix(y_test, y_pred, normalize=True)"
-      ],
-      "metadata": {
-        "id": "HCcZCRuMbJqe"
-      },
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "print(classification_report(y_test, y_pred))"
-      ],
-      "metadata": {
-        "id": "Abv9nvg9bJn_"
-      },
-      "execution_count": null,
-      "outputs": []
-    }
-  ]
-}
+"""Импорт библиотек"""
+
+import scikitplot as skplt
+
+from sklearn import datasets\n
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import numpy as np
+
+"""Работа с данными"""
+
+#Вот тут(↓) же норм, что пробелы есть? Должно быть норм. Надеюсь норм.
+"hard_problem = datasets.make_classification(
+  n_samples=100,
+  n_features=100,
+  n_informative=50,
+  n_classes=3,
+  n_redundant=50,
+  n_clusters_per_class=1,
+  random_state=42,
+)
+
+X_train, X_test, y_train, y_test = train_test_split(
+  *hard_problem,
+  test_size=0.3,
+  random_state=1,
+)
+
+"""Обучение модели"""
+"""Обучим модель с k=8:"""
+
+clf = KNeighborsClassifier(n_neighbors=8)
+clf.fit(X_train, y_train)
+
+predictions = clf.predict(X_test)
+accuracy_score(y_test, predictions)
+
+
+a = []
+b = range(1, 30)
+for k in b:
+  clf = KNeighborsClassifier(n_neighbors=k)
+  clf.fit(x_train, y_train)
+  pred = clf.predict(x_test)
+  aa = accuracy_score(y_test, pred)
+  a.append(aa)
+
+fig, ax - plt.subplots() ax.plot(b, a)
+ax.set(xlabel="k", ylabel="Accuracy", title="Performance of knn")
+plt.show
+
+k_optim = 16
+
+clf = KNeighborsClassifier(n_neighbors=k_optim)
+clf.fit(X_train, y_train)
+
+y_pred = clf.predict(X_test)
+
+
+"""Валидация модели"""
+
+# Calculate accuracy
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+
+print("Test accuracy: %.5f" % accuracy)
+assert accuracy > 0.8, "попробуйте изменить следующие параметры: penalty, solver"
+
+print('Хорошая работа!')
+
+
+skplt.metrics.plot_confusion_matrix(y_test, y_pred, normalize=True)
+
+
+print(classification_report(y_test, y_pred))
