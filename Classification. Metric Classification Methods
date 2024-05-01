@@ -42,12 +42,13 @@ a = []
 b = range(1, 30)
 for k in b:
   clf = KNeighborsClassifier(n_neighbors=k)
-  clf.fit(x_train, y_train)
-  pred = clf.predict(x_test)
+  clf.fit(X_train, y_train)
+  pred = clf.predict(X_test)
   aa = accuracy_score(y_test, pred)
   a.append(aa)
 
-fig, ax - plt.subplots() ax.plot(b, a)
+fig, ax - plt.subplots()
+ax.plot(b, a)
 ax.set(xlabel="k", ylabel="Accuracy", title="Performance of knn")
 plt.show
 
